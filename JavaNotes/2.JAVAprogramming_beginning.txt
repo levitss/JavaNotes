@@ -1,0 +1,39 @@
+1. 프로그래밍이란
+    1)프로그래밍이란(programming)    
+        -컴퓨터가 일을 수행하도록 프로그래밍 언어로 명령어 집합을 만드는 일
+    2)컴파일(compile)
+        -프로그래밍 언어를 컴퓨터가 실행 가능한 기계어로 만드는 일
+    3)Compiler
+        -기계어로 바꾸어 주는 프로그램 (javac.exe, gcc(linux))
+2. Java_Programming
+    1)1991 제임스 고슬링 -Sun 마이크로시스템즈 연구원들
+    2) 당시 c+/++ 언어가 주류(포인터) 다양한 플랫폼마다 매번 다른 기계어로 컴파일을 해야 했음.
+    3)1996 JDK 1.0 공개
+        JDK1.2(Java 2 Platform Standard Edition)=j2se
+        JDK1.3
+        JDK1.4
+        ~~~
+        J2SE 5.0
+        JAVA se 6
+        JAVA se 8 (2014) LTS(LongTermSupport)
+        ~~
+        JAVA se 17
+3.자바프로그램의 특징
+    1)용어정리
+        -JDK Java Development Kit 개발용 라이브러리 JRE+JVM+a 
+        -JRE Java Runtime Environment 실행 환경
+        -JVM Java virtual machine 자바 프로그램이 실행되는 환경 JRE에 포함되어있음
+    2)플랫폼에 영향을 받지 않아 다양한 환경에서 사용가능
+        -Write Once, Run Anywhere  jvm덕에 밑 단의 신경을 안써도 되게 됨
+    3)객체지향언어=유지보수 쉽고 확장성 좋음
+    4) 프로그램이 안정적
+    5) 풍부한 기능이 제공되는 오픈소스
+4.자바를 활용한 프로그램
+    1)웹 사이트 구현
+    2)안드로이드 프로그래밍
+    3)게임?
+5.앞으로의 내용
+    1)자바 언어(syntax)
+    2)객체 지향 프로그래밍으로 자바 구현
+    3)자료구조 이해 및 구현
+    4)

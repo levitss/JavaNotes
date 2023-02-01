@@ -1,0 +1,28 @@
+1.Static
+    Static method, Static Variable는 메서드 영역의 Static area에 저장 된다.
+    프로그램 시작전에 로드되고 종료 시 소멸됨
+
+2.Static Variable
+    1)전역 변수로 사용. 클래스 공통 특성을 서술할때 사용. 
+        ex) 학번, 사번 
+
+
+    2)선언과 사용
+    인스턴스가 생성될 때 만들어지느 ㄴ변수가 아닌 처음 프로그램이 로디오딜 때 메모리 할당.
+    static var, class var    (vs instance var)
+    인스턴스 생성과 상관없이 사용 가능하니 클래스 이름으로 참조가 권장됨.
+
+    3)단점
+    메서드 영역의 일부분만 사용하므로 메모리 사용이 비효율적임
+    객체가 가지고 있는 데이터들은 본래 Encapsulation이 oop이 기본 컨셉인데 전역변수는 이에 위배된다.
+
+3. static method
+    1)클래스 이름으로 호출 가능
+    2)class method, static method
+    3)static method는 instance 생성과 무관하게 class명으로 호출 할 수 있음
+    4)인스턴스 생성전에 호출될 수 있음. so static method 내부에서는 인스턴스 변수를 사용할 수 없다. static var만 사용 가능함.
+
+
+150p
+
+

@@ -1,0 +1,20 @@
+1. console output
+    1)system.out.println
+                 print
+                 printf
+
+    2)printf("")
+    매개변수
+    %b  boolean 
+    %d  정수    decimal(10진수)
+    %O  8진수 oct int=023
+    %x  16진수    int=0x
+    %f  실수  float  %.5f 소수자리수
+    %c  문자    char
+    %s  문자열  string
+    %n  줄바꿈
+    %e  지수표현식  N^e
+
+2. console input
+    1)scanner Class
+        

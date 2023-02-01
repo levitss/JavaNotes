@@ -1,0 +1,58 @@
+변수(Variable)
+    변하는 값
+        int a=1;   슬라이드쇼 참조. 선언시 메모리에 할당됨.
+    
+상수(Constant)
+    수식에서 변하지 않는 값.
+    종류    
+        -리터럴(literal)=값 그 자체 (오른쪽에 있는 것들, 정수형 리터럴, 문자형 리터럴 등등) 
+        프로그램이 시작할 때 특정 메모리 공간 상수 풀(constant pool)에 자동으로 로딩이 됨.
+        변수에 값을 대입할 때 상수풀에서 복사 후 변수에 대입을 해주는 것.
+        
+        -파이널(final) = 프로그래머가 임의로 만든 상수. 
+        이름은 전부 대문자로. 
+        ex) final int MAX_SIZE=100;
+        단어 단위를 구분해서 읽기 쉽게 언더바_를 이용.
+        변하면 안되니 static 을 붙여서 사용
+        객체마다 저장할 필요가 없는 공용성을 위해 public
+        public static final int LLAS=2;  //declair and initialize
+ 
+
+- 클래스명의 첫 글자는 대문자로 한다.
+
+- 메서드명, 변수명의 첫 글자는 소문자로 한다.
+
+- 1개 이상의 단어로 이루어진 경우 단어의 첫 글자는 대문자로 한다. [ ex: countOfWords ]
+
+- 상수의 이름은 모두 대문자로 하며, 1개 이상의 단어로 이루어진 경우 "_"로 구분한다. [ ex: COUNT_OF_WORDS ]
+
+
+자료형의 형변환(Type_Conversion)
+    1)Type Casting
+        주체                        용어
+        Compiler (가 자동으로)      implicit conversion     묵시적
+        programmer(가 직접)         explicit conversion     명시적
+    
+    2)implicit conversion
+    바이트 크기가 작은 자료형에 큰 자료형으로. 자동으로 이루어짐
+        byte-short-int-long 순으로
+    덜 정밀한 자료형에서 더 정밀한 자료형으로.
+        byte-short-int-long-float-double
+        double e
+        int b
+        double a = e+b 일때 b는 double로 자동형변환됨.
+        
+연산시 형변환
+    -산술 연산시 형변환 발생
+        -연산은 cpu가 담당.
+        기본적으로 각 type은 그대로 유지됨.(int,long,float,double)
+        입력1   입력2   결과
+        byte + byte =   int
+        short + short =
+        
+
+
+
+
+        
+

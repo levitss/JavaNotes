@@ -1,0 +1,17 @@
+python3 standard type
+    1)none 
+        nonetype
+    2)numbers
+        -int float bool
+    3)sequences
+        -Mutable(변경됨)
+            -list(변경 가능한 여러개의 데이터 묶음 (배열?))
+        -immutable(변경되지 않음)
+            -tuple(생성후에 변경이 불가능한 여러개의 데이터 묶음) ex어제 주가
+            -string
+
+    4)set
+        -set(집합)
+    5) mapping 
+        dict(key-value store 방식을 가지고 자료를 저장)
+
