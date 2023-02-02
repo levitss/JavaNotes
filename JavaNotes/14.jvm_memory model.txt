@@ -1,3 +1,11 @@
+동작하고 있는 프로그램을 프로세스라고 한다.
+쓰레드를 활용해 프로세스 내에서 한번에 여러일을 할 수 있음.
+
+
+
+
+
+--------------------------------
 1. 자바의 메모리모델
     1)java.exe가 실행되면서 jvm이 생성됨
     -메모리공간활용의 효율성을 높이기 위해 메모리공간을 여러공간으로 나눔
@@ -81,3 +89,43 @@ https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html
     ////////////////////////////////////////////////////////////
 
 
+   class InitTestP
+    static int cv=1;
+    int iv=1;
+    static {cv=2;}
+    (iv=2;)
+    InitTest(){
+        iv=3;
+    }
+
+    public static void main(String []args){
+        InitTest i=new InitTest();
+        system.out.println(cv);
+        system.out.println(i.iv);
+    }
+
+
+
+
+
+
+
+1. reg에 java class code가 올라감
+2. static var 인 cv의 기억장소가 만들어짐.
+3. cv의 default값이 0으로 초기화 됨
+4. cv의 값이 지정해준 1로 초기화 됨
+5. static {}블럭이 실행됨.
+    인스턴스 변수인 int iv는 new InitTest()가 실행될 때 할당되니 매 인스턴스때마다 활성화됨.
+6.static 블럭안의 cv값이 2로 할당됨
+7. static 초기화가 끝나고 나면 initTest 클래스의 정보를 가지고 있는 곳에서 main method를 호출함.
+8.call stack에 main이 실행될 기억 장소가 마련 된다.
+9. InitTest i 라는 명령어가 먼저 실행 된다. 
+    InitTest 타입 변수형(InitTest라는 클래스의 인스턴스 변수)을 가진 메모리 주소를 가지는 참조 변수 i의 기억 장소를 call stack의 main method 영역에 만드는 것.
+
+10.오른쪽의 new InitTest()라는 명령어에 의해 새로운 initTest내의 인스턴스 변수 값을 넣을 수 있는 메모리 장소를 만든다. 현재는 인스턴스 변수가 iv뿐이라서 한 개만 생성됨. 단순 메모리 공간만 만들어 진 것이 아니라 initTest의 class와 서로 주소로 연결된 상태.
+
+
+
+
+
+    174p

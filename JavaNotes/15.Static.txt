@@ -15,6 +15,9 @@
     3)단점
     메서드 영역의 일부분만 사용하므로 메모리 사용이 비효율적임
     객체가 가지고 있는 데이터들은 본래 Encapsulation이 oop이 기본 컨셉인데 전역변수는 이에 위배된다.
+        클래스 내부의 메서드에서 사용하는 변수는 멤버 변수로 선언하는 것이 좋음.
+        멤버변수가 너무 많으면 인스턴스 생성 시 쓸데없는 메모리가 할당됨
+        --적절하게 사용해야
 
 3. static method
     1)클래스 이름으로 호출 가능
@@ -22,7 +25,104 @@
     3)static method는 instance 생성과 무관하게 class명으로 호출 할 수 있음
     4)인스턴스 생성전에 호출될 수 있음. so static method 내부에서는 인스턴스 변수를 사용할 수 없다. static var만 사용 가능함.
 
+4. 프로그램 변수 유형
+    변수 유형   선언위치        사용범위(scope)       메모리        life cycle
+    ===========================================================================
+    지역 변수   메서드 내부     메서드 내부에서만       stack          메서드 호출될때 생성
+                                                                    메서드 종료시 소멸
+    멤버 변수   클래스 내부     클래스 내외부           heap        인스턴스때 생성.
+    (인스턴스변수)                                                  주소값이 없을때 GC에 의해
 
-150p
+    static var  class           보통 public          static         프로그램 실행시 
+    class var                                                                프로그램 종료시
+   
+   class InitTestP
+    static int cv=1;
+    int iv=1;
+    static (cv=2;)
+    (iv=2;)
+    InitTest(){
+        iv=3;
+    }
+
+    public static void main(String []args){
+        InitTest i=new InitTest();
+        system.out.println(cv);
+        system.out.println(i.iv);
+    }
 
 
+
+
+
+
+
+1. reg에 java class code가 올라감
+2. static var 인 cv의 기억장소가 만들어짐.
+3. cv의 default값이 0으로 초기화됨
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+   -(private)나만 볼 수 있는거
+        같은 클래스 내에서 접근가능     
+        접근 제한을 했더라도 해당 멤버 변수를 사용할 수 있는 메서드를 제공해서 프로그램 의도에 맞게 멤버 변수의 값을 사용하도록 유도할 수 있음.
+    +(public) 누구나 접근 가능 
+        외부 클래스,외부 패키지에서 접근 가능
+    #(protected) 부모와 자식에게만 접근 가능 
+        상속관계의 클래스(다른 패키지에 속해있어도)에서만 접근가능
+     default(아무것도 표시 안함) 같은 패키지 내에서 접근 가능
+    public>protected>default>private
+
+5.  디자인패턴
+        1)생겨난 이유
+            -소프트웨어를 유연하고,확장성있고,유지보수가 용이하게 만드는 것은 매우 어려운 일임.
+            경험이 중요함.
+            성공적인 설계라는 것은 존재함
+            GoF Gang of Four 네 명의 학자가 좋은 설계라는 것은 이런것이다 라고 23개 패턴 제시함. 싱글톤은 그 중 하나
+
+
+6. static 응용 -singleton pattern
+    -전역변수를 사용하지 않고 객체를 하나만 생성하며 생성된 객체를 어디에서든지 참조 할 수 있게 한 패턴.
+    -어떤 클래스의 경우에는 정확히 하나의 인스턴스만을 갖도록 하는 것이 중요.
+    ex) DB와 연결하는 connection 은 여러개 일 수 있지만 connection pool은 한 개
+    한 회사에서 하나의 회계 시스템을 운영.
+
+    static method, static var를 사용
+
+    getInstance 메서드를 통해 모든 클라이언트에게 동일한 인스턴스를 반환하는 작업을 수행.
+
+    ex)
+    public class print 를 10명이서 사용할 경우
+    매번 printer p=new printer(); 객체 생성하기때문에 낭비임
+    ->생성자를 private로 선언해서 외부에서 호출 할 수 없게 해버림
+    대신 자기 자신 프린터에 대한 인스턴스를 하나 만들어 외부에 제공해줄 static메서드를 준비.
+
+
+
+    싱글톤 패턴으로 회사 객체 구현
+    -생성자는 private로 제한
+    -클래스 내부에 유일한 private 인스턴스 생성
+    -외부에서 유일한 인스턴스를 참조할 수 있는 public 메서드 제공
