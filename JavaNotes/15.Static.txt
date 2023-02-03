@@ -36,65 +36,12 @@
     static var  class           보통 public          static         프로그램 실행시 
     class var                                                                프로그램 종료시
    
-   class InitTestP
-    static int cv=1;
-    int iv=1;
-    static (cv=2;)
-    (iv=2;)
-    InitTest(){
-        iv=3;
-    }
-
-    public static void main(String []args){
-        InitTest i=new InitTest();
-        system.out.println(cv);
-        system.out.println(i.iv);
-    }
-
-
-
-
-
-
-
-1. reg에 java class code가 올라감
-2. static var 인 cv의 기억장소가 만들어짐.
-3. cv의 default값이 0으로 초기화됨
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
 
 
    
-   -(private)나만 볼 수 있는거
-        같은 클래스 내에서 접근가능     
-        접근 제한을 했더라도 해당 멤버 변수를 사용할 수 있는 메서드를 제공해서 프로그램 의도에 맞게 멤버 변수의 값을 사용하도록 유도할 수 있음.
-    +(public) 누구나 접근 가능 
-        외부 클래스,외부 패키지에서 접근 가능
-    #(protected) 부모와 자식에게만 접근 가능 
-        상속관계의 클래스(다른 패키지에 속해있어도)에서만 접근가능
-     default(아무것도 표시 안함) 같은 패키지 내에서 접근 가능
-    public>protected>default>private
 
 5.  디자인패턴
         1)생겨난 이유
