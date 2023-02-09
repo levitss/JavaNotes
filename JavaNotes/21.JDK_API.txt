@@ -1,0 +1,57 @@
+1.Package java.lang
+    import 하지 않아도 자동으로 import되는 package
+    많이 사용되는 기능 모음
+
+2.java.lang.Object class
+    모든 클래스는 object Class를 상속받음. extends Object
+    모든 클래스의 최상위 클래스
+    Object 클래스의 메서드 중 일부는 오버라이딩 해서 사용 가능 
+        ex)
+        toString    객체의 정보를 String으로 변환할 때 사용
+        String이나 Integer 클래스는 이미 재정의되어있음
+
+3. 객체간의 논리적인 동등함
+    주소값은 다르나 그 값이 같은 객체는 논리적으로 동등하다.
+
+    1)equals()  두 인스턴스의 주소값을 비교. true/false 반환
+                재정의하여 두 인스턴스가 논리적으로 동일함의 여부를 구현함
+                인스턴스가 다르더라도 논리적으로 값이 동일한 경우 두 객체를 동일한 객체로 반환하도록 재정의 할 수 있음
+
+                String str1 = new String("aaa");
+                String str2 = new String("aaa");
+
+                System.out.println(str1 == str2); //false
+                System.out.println(str1.equals(str2));  //true
+ 
+
+        new 키워드를 통해 다른 String 객체를 메모리에 할당하였으므로 str1과 str2가 가리키는 객체의 주소 값은 다르므로 동일하지 않다. 하지만 String이 재정의한 equals() 연산자에 의해 두 객체의 내용이 같으므로 동등하다고 할 수 있다.
+
+    2)hashcode()
+        인스턴스의 저장 주소를 반환
+        heap에 인스턴스가 저장되는 방식이 hash방식
+        자료의 특정 값에 대한 저장 위치를 반환해주는 해시함수를 사용 ex toString
+
+        두 인스턴스가 같다는것
+        equals 값이 true
+        같은 hash값 반환
+
+
+
+        결론 두 객체가 할당된 메모리 주소가 같으면 동일하고, 두 객체의 내용이 같으면 동등하다고 말한다.
+            동일성은 == 연산자를 통해 판별할 수 있고, 동등성은 equals 연산자를 통해 판별할 수 있다.
+
+
+
+4. String, StringBuilder, Stringbuffer
+    1. String 객체 선언
+        -String s1=new String("s");//인스턴스 생성
+        -String s2="s";             //상수풀의 문자열
+
+    2. 한번 생성된 String은 불변
+        ->list->string으로 변경
+
+
+
+
+
+        
