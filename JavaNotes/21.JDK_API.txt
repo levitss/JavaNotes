@@ -10,7 +10,7 @@
         toString    객체의 정보를 String으로 변환할 때 사용
         String이나 Integer 클래스는 이미 재정의되어있음
 
-3. 객체간의 논리적인 동등함
+3. 객체간의 논리적인 동등함//동일성 동등성
     주소값은 다르나 그 값이 같은 객체는 논리적으로 동등하다.
 
     1)equals()  두 인스턴스의 주소값을 비교. true/false 반환
@@ -30,6 +30,11 @@
         인스턴스의 저장 주소를 반환
         heap에 인스턴스가 저장되는 방식이 hash방식
         자료의 특정 값에 대한 저장 위치를 반환해주는 해시함수를 사용 ex toString
+        기본적으로 충돌이 없는 고유의 값을 가지나 종종 중복이 일어날 수 있다.
+        
+        Hashcode를 사용하는 이유
+
+        Hashcode를 사용하는 이유 중에 하나는, 객체를 비교할 때 드는 비용을 낮추기 위해서 입니다. 자바에서 2개의 객체가 같은지 비교할 때 equals()를 사용하는데, 여러 객체를 비교할 때 equals()를 사용하면 Integer를 비교하는 것에 비해 많은 시간이 소요됩니다. Java에서 hashcode는 Integer이며, hashcode를 이용하여 객체를 비교하면 equals()를 이용하는 것보다 시간이 단축됩니다. 보통 HashMap에서 hashcode를 이용하여 객체를 매핑하며 객체를 찾을 때 사용합니다.
 
         두 인스턴스가 같다는것
         equals 값이 true
@@ -42,16 +47,167 @@
 
 
 
-4. String, StringBuilder, Stringbuffer
+4. String
     1. String 객체 선언
         -String s1=new String("s");//인스턴스 생성
-        -String s2="s";             //상수풀의 문자열
+        -String s2="s";             //String상수풀의 문자열-heap영역에 생성됨
+        
+         Java String Pool은 기본적으로 HashTable 구조를 가지고 있다고 합니다. String을 hashing하고 그것을 key로 하여 값을 찾기 때문에(중복 배제) String Pool은 좋은 성능을 발휘할 수 있다고 합니다. 이 Hash Table의 Bucket의 default 크기는 Java 버전마다 다소 차이가 있습니다. Java 7부터는 1009 이며 Java 11 부터는 60013의 크기를 기본으로 가지고 있습니다.
 
-    2. 한번 생성된 String은 불변
+        이 Bucket의 크기 또한 옵션으로 확장가능하며 옵션은 -XX:StringTableSize를 사용하시면 됩니다. interning 된 String을 많이 접근한다고 하면 이 크기를 늘리는 것도 필요할 수 있습니다. 크기는 2의 지수승에서 가까운 소수로 하시면 적절한 성능을 얻을 수 있다고합니다. (java-performance_string-intern-in-java-6-7-8)
+        hash는 보통 31곱
+
+
+
+        한번 생성된 String은 불변
         ->list->string으로 변경
 
+    2.String 클래스의 메서드
+        concat() 문자열 합치기
+            기존의 객체에 연결되는 것이 아니라 새로운 객체 생성
+        indexof() 문자열에서 문자찾기(맨처음것만)
+        intern() Stringpool에 스트링 추가
+        length()
+        valueOf(E) 기본 자료형을 문자열로 바꾸기
+        substring 문자열 자르기
+        conrains(CharSequence s) s 포함하는지
+        startwith(String s) 시작하는 문자열이 s인지
+        endswith(string s) 끝나는 문자열이 s인지
+        imEmpty() length가 0이면 true
+        toLowerCase toUpperCase
+        trim()앞뒤의 공백 제거
+        charAt() x번째 숫자
+
+5.StringBuilder, Stringbuffer
+    mutable한 하나의 객체. 대신 String보다 무겁다.
+    내부적으로 가변적인 char[]를 멤버변수로 가짐
+    새로운 인스턴스를 생성하지 않고 char[]를 변경함
+
+    스레드= task 단위 
+    싱글스레드에선 StringBuilder
+    멀티스레드에선 Stringbuffer
+    동기화 =순서정리
+    StringBuffer는 동기화를 제공하는 대신 속도가 느리고
+    StringBuilder는 동기화를 제공하지 않아 속도가 보다 빠릅니다.
 
 
-
-
+    append() 문자열 추가
+        String a = "Hello";
+        String b = " World";
+        String c = a+b;  // new StringBuilder(String.valueOf(a)).append(b).toString();
+        System.out.println(c); // Hello World
         
+        String의 +도 append임
+    insert()
+    substring() 
+
+6. text block (java13부터)
+    1.""" """ 사이에 이어서 만들 수 있음 //파이선과 유사
+    2.html json 문자열을 만드는데 사용할 수 있음.
+    3.
+
+
+7.class클래스
+    1. 자바의 모든 클래스와 인터페이스는 컴파일 후 class 파일이 생성됨. jvm에 입력되는 코드=class파일
+    2.class클래스는 컴파일된 class 파일을 로드하고 정보를 가져오는 메서드가 제공됨
+    3.동적로딩
+        forName(String Classname) 클래스로더. 물리적인 클래스 파일명(폴더안의)을 인자로 넣어주면 이에 해당하는 클래스를 반환해줍니다.
+            실행(runtime) 중에 원하는 클래스를 로딩하여 binding 할 수 있음.
+            컴파일시가 아니고 동적 로딩시 오류가 발생시 프로그램의 장애가 발생할 수 있음
+
+    4. newinstance()
+        인스턴스 생성
+        new키워드를 사용하지 않고 클래스 정보만으로 인스턴스 생성
+
+
+
+    5.클래스 정보 알아보기
+        reflection 프로그래밍
+            리플렉션이란 객체를 통해 클래스의 정보를 분석해 내는 프로그램 기법
+
+            class 클래스를 사용하여 클래스의 정보(생성자, 변수, 메서드) 등 을 알 수 있고, 인스턴스를 생성하고, 메서드를 호출하는 방식의 프로그래밍 
+            로컬메모리에 개체 없는 경우, 원격, 객체의 타입을 알 수 없는 경우 사용
+
+            -java.lang.reflect 패키지에 있는 클래스를 활용
+            일반적으로 자료형을 알고 있는 경우엔 사용하지 않음
+            
+Class c = Data.class;
+//Class c = Class.forName("클래스이름");
+
+Method[] m = c.getMethods();                     
+
+Field[] f = c.getFields();
+Constructor[] cs = c.getConstructors();
+Class[] inter = c.getInterfaces();
+Class superClass = c.getSuperclass();
+
+
+
+- 클래스 초기화 에러
+
+만약 Class.forName(String)을 사용해서 로딩할 때 static 영역에서 에러가 난다면 해당 클래스는 다시 로딩할 수가 없습니다. 특정 클래스로더가 일단 로딩한 클래스는 다시 로딩할 수가 없죠. 
+
+그래서 NoClassDefinitionFound 에러가 날 수도 있습니다.
+
+이때는 해당 클래스로더 인스턴스를 버리고 새로 만들어야 하는데 그럴 때를 대비해 인자 세개짜리 forName을 쓰라는군요.
+
+
+        ClassLoader.loadClass()
+
+        Class.forName(String) 메서드를 사용하면 곧바로 클래스의 static 초기화 블럭과 static 멤버 변수의 값을 초기화 합니다. 하지만 ClassLoader.loadClass()를 사용하면 해당 클래스를 처음으로 사용하기 전까지 초기화가 지연됩니다.
+
+
+
+
+
+
+자바 파일은 확장자가 .java 인 파일로서 자바 언어로 소스 코드를 작성할 때 그 내용을 적는 파일을 뜻합니다.
+
+그리고 이 자바 파일을 자바 컴파일러로 컴파일한 파일이 바로 .class 확장자를 가진 클래스 파일입니다.
+
+우리가 흔히 이클립스와 같은 IDE 혹은 커맨드 라인에서 javac 명령어를 통해 컴파일했을 때 나오는 파일이죠.
+
+이 클래스 파일을 가지고 자바의 클래스 로더(Class Loader)가 JVM으로 클래스 파일을 로딩합니다.
+
+Java에서 클래스의 로딩 과정은 클래스 로더(Class Loader)가 확장자가 .class 클래스 파일의 위치를 찾아
+
+그것을 JVM위에 올려놓는 과정을 뜻합니다. 
+
+동적 로딩
+Java는 동적 로딩을 지원하기 때문에 실행 시에 모든 클래스가 로딩되지 않고 필요한
+
+시점에 클래스를 로딩하여 사용할 수 있습니다. 
+
+로드 타임 동적 로딩 : 하나의 클래스를 로딩하는 과정에서 필요한 다른 클래스를 동적으로 로딩하는 것
+    예를 들어 우리가 처음에 시작하는 Hello.java에서  저희는 System.out.prinln("Hello World");와 같은 코드를 작성하고
+    이를 Hello.class로 컴파일합니다.  이 때 Hello.class만 JVM에 로딩하는게 아니라 Hello.class를 로딩하는데 
+    필요한  System, String 관련 .class파일들도 미리 JVM에 로딩된다는 것입니다.   
+    여기서 System,String 관련 .class파일을 로딩하지못하면 역시 Hello.class를 로딩하지 못합니다.
+
+    
+
+
+런타임 동적 로딩 : 코드를 실행하는 순간에 필요한 클래스를 로딩하는 것 
+     로딩을 하고나서는 다음 내용을 실행합니다.   바로 Class.forName("로드할 클래스 이름")이 바로 런타임동적로딩에 해당합니다.
+
+javac.exe로 .class를 만들면서 로드타임 동적로딩이 되고 jvm이 실제로 java.exe로 실행될 때 런타임 동적로딩이 된다.
+
+
+
+
+
+
+
+
+String은 객체인데 출력을 하면 왜 메모리 주소가 아닌 값이 찍히는 것일까?
+
+일단 System.out.println(); 이 동작하는 과정을 따라가 보았습니다.
+
+System.class -> PrintStream.class -> BufferedWriter.class -> Writer.class -> StringWriter.class
+
+ 
+
+StringWriter.class 를 보면 StringBuffer에 값을 append해서 write를 하게 되는데,
+
+StringWriter.class에는 toString 메소드가 오버라이드 되어 있어 문자열로 출력을 하게 됩니다.
+

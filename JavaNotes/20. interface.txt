@@ -58,12 +58,6 @@ Interface
 
 
 
-                stack 선입 후출
-                queue 선입 선출
-
-
-
-
 
     DAO data access object
     data에 접근위한 객체
