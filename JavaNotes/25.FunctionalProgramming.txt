@@ -1,0 +1,117 @@
+함수형 프로그래밍 
+    자료 처리를 수학적 함수의 계산으로 취급하고 상태와 가변 데이터를 멀리하는 프로그래밍 패러다임의 하나이다.
+
+비교
+    명령형 프로그래밍
+    (imperative programming)
+        -oop
+        어떻게 해야 하는가에 중점. How to do
+
+    for(int i=0;i<10;i++){
+        System.out.println(i);
+    }
+
+    
+    함수형 프로그래밍 (람다)
+        =선언형프로그래밍
+        Declarative
+        What to do 중점
+
+    IntStream.range(0.10).forEach((int value)->System.out.println(value));
+    IntStream.range(0.10).forEach(value->System.out.println(value)); 자료형 추론
+    IntStream.range(0.10).forEach(System.out::println); 메서드참조를 사용한 코드
+
+
+유저 리스트가 있을 때 검증되지 않은 유저들의 이메일을 리스트로 요구할 시
+    명령형
+    1.이메일을 담을 리스트 선언
+    2.루프
+    3.유저 변수 선언
+    4.검증되지 않았는지 조건 체크
+    5.검증 되지 않은 것들은 이메일 추출
+    6.변수에 저장
+
+    함수형
+    1.유저리스트에서(함수내에서 처리 후 )
+        검증되지 않은 유저만 골라내서
+        이메일을 추출해서
+    리스트로 받기(return)
+
+3. Function as First Class Citizen
+    1급 시민으로서의 함수
+    1급시민의 조건
+        함수/메서드의 매개변수(parameter)로서 전달할 수 있는가?
+        함수 메서드의 반환값이 될 수 있는가?
+        변수에 담을 수 있는가?
+4. 함수형 프로그래밍을 통해 얻는 것
+    역할에 충실한 코드
+        가독성 좋은 코드(생략이 많음. 익숙해지면)
+        유지보수에 용이
+        버그 안전
+        확장 용이
+    패러다임의 전환
+        stream optional 등 다양한 활용
+
+5. java
+oop --> java <-- f(x)
+6.람다식
+    1. 자바는 객체지향
+        기능을 수행하기 위해서는 객체를 만들고 그 객체 내부에 멤버 변수를 선언하고 기능을 수행하는 메서드를 구현
+    자바 8부터 함수형 지원했는데 이를 람다식이라 함
+    함수의 구현과 호출만으로 프로그래밍이 수행되는 방식
+    Functional Programming FP
+        Pure Function을 구현하고 호출함
+            외부자료에 부수적인 영향을 주지않도록 구현하는 방식
+            매개변수만을 사용하여 만드는 함수
+            함수 내부에서 함수 외부에 있는 변수를 사용하지 않아 함수가 수행되더라도 외부에 영향을 안줌
+    여러 자료가 동시에 수행되는 병렬처리가 가능함
+    함수의 기능이 자료에 독립적임을 보장
+
+7. 람다식 문법
+    익명함수
+    매개변수와 매개변수를 이용한 실행문
+    (매개변수)->실행문;
+
+    (a,b)->{return a+b;}
+    매개변수가 하나면 자료형과 괄호 생략 가능
+    str->{System.out.println(str)}
+    매개변수가 두개 이상은 괄호 생략 안됨
+    실행문이 한 문장이면 중괄호 생략 가능 리턴 있으면 예외
+    str->{return str.lenght()};
+    실행문이 한 문장의 반환인 경우엔 return 중괄호 모두 생략 가능
+    (a,b)->a+b;
+    
+8. 함수형 인터페이스
+    람다식을 선언하기 위한 인터페이스
+    익명함수와 매개변수만으로 구현되므로 하나의 함수를 가진다 
+    인터페이스 위에 annotation @FunctionalInterface 적으면 됨
+    단 하나만의 abstract method를 가지는 interface (Single Abstract Method Interface)=SAM
+(default static 등등은 이미 구현되어있음)
+
+    그 외에도 자바에서 제공하는 인터페이스가 많음
+    public interface Function<T, R> {
+        R apply(T t);
+(Integer x)->{return x+10;};
+x->x+10;
+    public interface BiFunction<T, U, R> {
+    R apply(T t, U u);
+
+
+    함수의 구성요소
+        함수의 이름
+        반환값의 타입
+        매개변수
+        함수의 내용
+
+매개변수의 타입이 유추 가능하면 타입 생략 가능
+매개변수가 하나일 경우 괄호 생략 가능
+바로 리턴하는 경우 중괄호 생략 가능
+
+
+
+
+
+
+
+
+    삼항연산자 (조건문)?ㅁ:ㄴ;
