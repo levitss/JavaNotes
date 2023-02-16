@@ -1,0 +1,57 @@
+프로그램에서의 오류
+    컴파일 오류 compile
+        프로그램 코드 작성 중 발생하는 문법적 오류
+        ide개발환경에서 대부분의 컴파일 오류는 detect됨
+    실행오류 runtime
+        실행중인 프로그램이 의도치않는 동작을 하거나 중지되는 오류
+    
+예외처리
+    프로그램이 비정상 종료를 피하여 시스템이 원활히 실행되도록 해주는 처리
+    오류가 발생한 경우 log를 남겨서 추후 분석을 통해 수정을 할 수 있음
+
+오류와 예외
+    1. 시스템오류
+        프로그래머가 처리할 수 없는 경우
+            동적메모리가 없는 경우, 스택 오버플로우 같은 경우
+
+    2. 예외 (exception)
+        프로그램에서 제어할 수 있는 오류
+        읽어들이려는 파일이 존재하지않거나 네트웤이나 db연결이 안되는 경우
+        자바는 안정성이 중요한 언어로 대부분 프로그램에서 발생하는 오류에 대해 문법적으로 예외처리를 해줘야 함
+
+예외 클래스들
+    Class Exception
+        예외 최상위 클래스
+    다양한 예외들에 대해 그 처리를 위한 클래스가 제공된다
+        ArithmeticException 정수를 0으로 나눈 경우
+        NullpointerException obj가 초기화되지 않은경우
+        ArrayIndexOutOfBoundsException 어레이 범위 벗어난 경우
+        ClassNotFoundException 클래스가 로드되지 않은 경우
+        FileNotFoundException 참조하려는 파일이 지정된 위치에 존재하지 않는 경우
+        InterruptedException thread를 runnable 하게 만들 수 있도록 사용할 수 있음
+
+방법
+    try~catch 고전적 방법. 적극적이다
+    try{
+        실행문
+    } catch (Exception e){
+        예외 발생시 실행 할 구문
+    } finally{
+        반드시 실행되어야 할 구문
+    }
+
+    finally 블럭에서 파일을 닫거나 네트윅을 닫는 등의 리소스 해제 구현을 함
+
+    다만 코드가 너무 길어지는 부작용이 있음
+
+방법2 
+    try with resources //자바 7부터
+    리소스를 사용하는 경우 close()하지 않아도 자동으로 해제되도록 함
+    리소스를 try{}내에서 선언
+        try{} 블록에서 열린 리소스는 정상적이든 아니든 자동으로 해제됨
+    해당 리소스 클래스가 autoCloseable 인터페이스를 구현해야 함
+        FileInputStream의 경우는 autoCloseable 구현하고 있음.
+
+    자바 9부터는 
+        리소스는 try()외부에서 선언하고
+        변수만을 try(obj)와 같이 사용할 수 있음.
