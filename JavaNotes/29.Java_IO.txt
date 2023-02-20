@@ -1,0 +1,93 @@
+io을 위한 stream
+    네트워크에서 자료의 흐름이 물의 흐름과 같다는 비유에서 유래됨
+    다양한 입출력 장치에 독립적으로 일관성 있는 입출력을 입출력 스트림을 통해 제공
+    입출력이 구현되는 곳
+        파일 디스크, 키보드, 마우스 등
+        모든 자료가 입출력 되는 곳
+    
+    입출력 스트림 구분
+        대상 기준
+            입력 스트림 / 출력 스트림
+        자료의 종류
+            바이트 스트림/문자 스트림
+        기능    
+            기반 스트림/보조 스트림
+
+    입력 / 출력 스트림
+    입력-대상으로부터 자료를 읽어들이는 스트림
+        fileinputstream filereader
+        bufferedinputStream bufferedReader
+    출력-대상으로 자료를 출력하는 스트림
+        fileoutputStream fileWriter
+        BufferedOutputStream BufferedWriter
+
+바이트 스트림/문자 스트림
+    바이트단위 스트림
+        동영상 음악 실행파일들
+        fileinputstream fileoutputStream
+        bufferedinputStream BufferedOutputStream
+
+    문자단위 스트림
+        바이트 단위로 자료를 처리하면 문자는 깨짐
+        인코딩에 맞게 2바이트 이상으로 처리하도록 구현된 스트림
+        filereader filewriter
+        bufferedReader BufferedWriter
+
+기반 스트림 보조스트림
+    기반스트림
+        대상에 직접 자료를 읽고 쓰는 기능의 스트림
+        fileinputstream fileoutputStream
+        filereader fileWriter
+
+    보조 스트림
+        직접 읽고 쓰는 기능은 없이 추가적인 기능을 더해주는 스트림
+        inputStreamReader OutputStreamWriter
+        bufferedinputStream BufferedOutputStream
+
+    보조는 직접적인 기능이 없어 항상 기반 스트림 또는 또 다른 보조 스트림과 같이 사용
+    기반+보조+보조
+
+표준 입출력 스트림
+    System.out
+        표준 출력 스트림(모니터)
+        System.out.print
+    System.in
+        표준 입력(키보드) 스트림
+        int d=System.in.read()//return int, 한 바이트씩 읽기
+바이트단위 스트림
+    inputStream
+        바이트 단위 입력 스트림으로서 최상위 추상 클래스
+        이를 하위 스트림이 상속받아 구현함
+        FileInputStream
+            파일에서 바이트 단위로 자료를 읽음
+        주요 메서드
+            int read()
+                입력 스트림으로부터 한 바이트의 자료를 읽음
+                읽은 자료의 바이트 수를 반환
+            int read(byte[] b)
+                입력 스트림으로부터 b[] 크기의 자료를 b[]에 읽어들임
+                읽은 자료의 바이트 수 만큼 반환
+            int read(byte[] b, int off, int len)
+                입력 스트림으로부터 b[]크기의 자료를 off번째 변수 위치 부터 저장하며 len 만큼 읽음
+            void close()
+                입력 스트림과 연결된 대상 리소스(메모리)를 닫는다
+            
+    OutputStream
+        바이트단위 출력 스트림 최상위 추상 클래스
+        많은 추상 메서드가 선언되어있고 이를 하위 스트림이 받아 구현
+        주요메서드 
+            void write(int b)
+                한 바이트 출력
+            void write(byte[]b)
+                b[]크기 자료를 출력
+            void write(byte[]b,int off,int len)
+                b[]배열에 있는 자료의 off 위치부터 len 개수만큼 출력
+            void close()
+                출력 스트림과 연결된 대상 리소스를 닫음
+                출력 버퍼가 비워짐
+            void flush()
+                출력을 위해 잠시 자료가 머무르는 출력 버퍼를 강제로 비워 자료들 출력함
+문자 단위 스트림
+    Reader
+        문자단위 입력 스트림 최상위 클래스
+        많은 추상 메서드가 선언되어있고 이를 하위 스트림이 상속받아 구현함
